@@ -1,9 +1,10 @@
-package com.kirwa.taskapp
+package com.kirwa.taskapp.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.kirwa.taskapp.R
 import com.kirwa.taskapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
