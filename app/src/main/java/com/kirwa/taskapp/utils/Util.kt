@@ -1,31 +1,21 @@
-package com.uda.grassrootelection.utils
+package com.kirwa.taskapp.utils
 
 import android.content.Context
-import android.content.pm.PackageManager
-import android.graphics.drawable.Drawable
-import android.media.MediaPlayer
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import android.os.VibrationEffect
-import android.os.Vibrator
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputLayout
-import com.kirwa.taskapp.utils.capitalizeWords
-import com.uda.grassrootelection.R
 import okhttp3.ResponseBody
 import org.json.JSONException
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.Date
-import java.util.Locale
 
 internal class Util {
     companion object {
@@ -36,26 +26,6 @@ internal class Util {
             return weekday
         }
 
-        fun getMinWeekDayFromUTC(timeString: Int?): String {
-            val sdf = SimpleDateFormat("EEE")
-            val dateFormat: Date = Date(timeString.toString().toLong() * 1000)
-            val weekday: String = sdf.format(dateFormat)
-            return weekday
-        }
-
-        fun getMinMonthFromUTC(timeString: Int?): String {
-            val sdf = SimpleDateFormat("d MMM")
-            val dateFormat: Date = Date(timeString.toString().toLong() * 1000)
-            val month: String = sdf.format(dateFormat)
-            return month
-        }
-
-        fun getDateLatestUpdated(timeString: Int?): String {
-            val sdf = SimpleDateFormat("hh:mm a")
-            val dateFormat: Date = Date(timeString.toString().toLong() * 1000)
-            val dateTime: String = sdf.format(dateFormat)
-            return dateTime
-        }
 
 
         fun getCurrentDayOfTheWeek(): String {
@@ -79,41 +49,6 @@ internal class Util {
         }
 
 
-        fun playSoundMistake(context: Context?) {
-            val mp: MediaPlayer =
-                MediaPlayer.create(context, R.raw.mistake_beep)
-            mp.start()
-        }
-
-        fun playSoundSuccess(context: Context?) {
-            val mp: MediaPlayer =
-                MediaPlayer.create(context, R.raw.success_beep)
-            mp.start()
-        }
-
-        fun playSoundSuccess2(context: Context?) {
-            val mp: MediaPlayer =
-                MediaPlayer.create(context, R.raw.add_beep)
-            mp.start()
-        }
-
-        fun playSoundSuccessEndVoting(context: Context?) {
-            val mp: MediaPlayer =
-                MediaPlayer.create(context, R.raw.end_voting)
-            mp.start()
-        }
-
-
-        fun vibrateDevice(context: Context) {
-            val v = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-            // Vibrate for 500 milliseconds
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE))
-            } else {
-                //deprecated in API 26
-                v.vibrate(500)
-            }
-        }
 
         fun setRecyclerViewNoDivider(context: Context?, recyclerView: RecyclerView) {
             val mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -121,39 +56,8 @@ internal class Util {
             recyclerView.itemAnimator = DefaultItemAnimator()
         }
 
-        fun getCurrentDateTimeWithTimeZone(): String? {
-            val mSDF = SimpleDateFormat(
-                Constants.SIMPLE_DATE_TIME_FORMAT_TIME_ZONE,
-                Locale.getDefault()
-            )
-            return mSDF.format(Date())
-        }
 
-        fun getPage(position: String): Int {
-            return when (position.trim()) {
-                "Religious Group Representative" -> 1
-                "MSME Representative" -> 2
-                "Professional Group Representative" -> 3
-                "Youth Representative" -> 4
-                "Farmers Representative" -> 5
-                "Member" -> 6
-                "Special Interest Groups Rep" -> 7
-                else -> 0
-            }
-        }
 
-        fun displayPlaceHolder(gender: String, context: Context): Drawable? {
-            return if (gender == "Male") {
-                ContextCompat.getDrawable(context, R.drawable.man)
-            } else {
-                ContextCompat.getDrawable(context, R.drawable.woman)
-            }
-        }
-
-        fun removeUnderScores(s: String?): String? {
-            val removeUnderScores = s?.replace("_".toRegex(), " ")
-            return removeUnderScores?.capitalizeWords()
-        }
 
         fun isConnected(context: Context): Boolean {
             var result = false
@@ -189,22 +93,6 @@ internal class Util {
                 ConnectivityManager.TYPE_ETHERNET -> true
                 else -> false
             }
-        }
-
-
-        fun hasPermissions(context: Context?, permissions: List<String?>?): Boolean {
-            if (context != null && permissions != null) {
-                for (permission in permissions) {
-                    if (ActivityCompat.checkSelfPermission(
-                            context,
-                            permission!!
-                        ) != PackageManager.PERMISSION_GRANTED
-                    ) {
-                        return false
-                    }
-                }
-            }
-            return true
         }
 
         fun clearTextInputEditText(

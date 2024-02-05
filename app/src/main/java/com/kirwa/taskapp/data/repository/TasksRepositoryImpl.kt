@@ -5,7 +5,7 @@ import com.kirwa.taskapp.data.local.model.Tasks
 import com.kirwa.taskapp.data.remote.api.TaskApiService
 import com.kirwa.taskapp.data.remote.model.Result
 import com.kirwa.taskapp.data.remote.model.TasksResponse
-import com.uda.grassrootelection.utils.Util.Companion.errorMessage
+import com.kirwa.taskapp.utils.Util.Companion.errorMessage
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -23,7 +23,7 @@ internal class TasksRepositoryImpl(
         return tasksDao.getTasks()
     }
 
-    override fun searchTasks(searchString:String): Flow<Tasks> {
+    override fun searchTasks(searchString:String): Flow<List<Tasks>> {
         return tasksDao.searchTasks(searchString)
     }
 

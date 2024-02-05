@@ -1,9 +1,7 @@
 package com.kirwa.taskapp.data.remote.api
 
 import com.kirwa.taskapp.data.local.model.Tasks
-import com.kirwa.taskapp.data.remote.model.PostTask
 import com.kirwa.taskapp.data.remote.model.TasksResponse
-import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
 

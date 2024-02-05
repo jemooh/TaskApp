@@ -13,5 +13,5 @@ interface TasksRepository {
     suspend fun deleteTasks(taskId: String?): Result<TasksResponse>
     suspend fun getRemoteTasks(): Result<Boolean>
     fun getTasks(): Flow<List<Tasks>>
-    fun searchTasks(searchString:String): Flow<Tasks>
+    fun searchTasks(searchString:String): Flow<List<Tasks>>
 }

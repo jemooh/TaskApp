@@ -19,6 +19,6 @@ interface TasksDao : CoroutineBaseDao<Tasks> {
     fun reopenTasks(taskId: String?)
 
     @Query("SELECT * FROM Tasks WHERE content  LIKE :searchString ")
-    fun searchTasks(searchString: String?): Flow<Tasks>
+    fun searchTasks(searchString: String?): Flow<List<Tasks>>
 
 }
