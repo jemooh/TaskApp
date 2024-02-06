@@ -11,21 +11,21 @@ import retrofit2.http.*
 interface TaskApiService {
 
     @POST("rest/v2/tasks")
-        suspend fun postCreateTask(@Body task: Tasks): Response<Tasks>
+        suspend fun postCreateTask(@Body task: Tasks): Response<TasksResponse>
 
     @GET("rest/v2/tasks")
     suspend fun getRemoteTasks(): Response<List<TasksResponse>>
 
     @POST("rest/v2/tasks/{task_id}")
-    suspend fun updateTask(@Path("task_id") taskId: String?): Response<TasksResponse>
+    suspend fun updateTask(@Path("task_id") taskId: String?,@Body task: Tasks): Response<TasksResponse>
 
     @POST("rest/v2/tasks/{task_id}/reopen")
     suspend fun reopenTask(@Path("task_id") taskId: String?): Response<TasksResponse>
 
-    @POST("rest/v2/tasks/{task_id}")
+    @POST("rest/v2/tasks/{task_id}/close")
     suspend fun closeTask(@Path("task_id") taskId: String?): Response<TasksResponse>
 
-    @POST("rest/v2/tasks/{task_id}")
+    @DELETE("rest/v2/tasks/{task_id}")
     suspend fun deleteTask(@Path("task_id") taskId: String?): Response<TasksResponse>
 
 }

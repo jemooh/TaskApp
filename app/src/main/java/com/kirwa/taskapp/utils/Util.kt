@@ -34,20 +34,18 @@ internal class Util {
             return sdf.format(d)
         }
 
-        fun ResponseBody.errorMessage(): String {
+ /*       fun ResponseBody.errorMessage(): String {
             val responseBodyString = this.string()
             return try {
-                val error = JSONObject(responseBodyString)
+                //val error = JSONObject(responseBodyString)
                 var message = "Unknown Error"
-                //val statusMessage = error.getJSONObject("message")
-                val name = error.optString("message")
-                //if (statusMessage.has("message")) message = statusMessage["message"].toString()
-                name
+                //val name = error.optString("message")
+                responseBodyString
             } catch (e: JSONException) {
                 "Internal Server Error, Please try again"
             }
         }
-
+*/
 
 
         fun setRecyclerViewNoDivider(context: Context?, recyclerView: RecyclerView) {

@@ -1,3 +1,27 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="button_height">58sp</dimen>
+    <dimen name="edit_view_height">48sp</dimen>
+    <dimen name="dimen_1">1dp</dimen>
+    <dimen name="dimen_4">4dp</dimen>
+    <dimen name="dimen_5">5dp</dimen>
+    <dimen name="dimen_8">8dp</dimen>
+    <dimen name="dimen_16">16dp</dimen>
+    <dimen name="dimen_11">11dp</dimen>
+    <dimen name="dimen_12">12dp</dimen>
+    <dimen name="dimen_10">10dp</dimen>
+    <dimen name="dimen_24">24dp</dimen>
+    <dimen name="dimen_20">20dp</dimen>
+    <dimen name="dimen_36">36dp</dimen>
+    <dimen name="dimen_32">32dp</dimen>
+    <dimen name="dimen_30">30dp</dimen>
+    <dimen name="dimen_40">40dp</dimen>
+
+    <dimen name="text_size_32">32sp</dimen>
+    <dimen name="text_size_20">20sp</dimen>
+    <dimen name="text_size_28">28sp</dimen>
+    <dimen name="text_size_16">16sp</dimen>
+    <dimen name="text_size_14">14sp</dimen>
+    <dimen name="text_size_12">12sp</dimen>
+    <dimen name="text_size_18">18sp</dimen>
 </resources>

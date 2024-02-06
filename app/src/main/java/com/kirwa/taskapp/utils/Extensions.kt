@@ -6,6 +6,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputLayout
 import com.kirwa.taskapp.R
 
 fun View.displaySnackBar(message: String) {
@@ -21,6 +22,10 @@ fun View.displayErrorSnackBar(message: String) {
 }
 
 
+fun TextInputLayout.setErrorMessage(errorMessage: String) {
+    this.isErrorEnabled = true
+    this.error = errorMessage
+}
 
 
 

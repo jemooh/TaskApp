@@ -9,6 +9,9 @@ interface TasksDao : CoroutineBaseDao<Tasks> {
     @Query("SELECT * FROM Tasks ")
     fun getTasks(): Flow<List<Tasks>>
 
+    @Query("SELECT * FROM Tasks WHERE taskId=:taskId ")
+    fun getTaskById(taskId: String?): Flow<Tasks?>
+
     @Query("DELETE FROM Tasks WHERE taskId=:taskId ")
     fun deleteTasks(taskId: String?)
 

@@ -5,27 +5,107 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ui.MainActivity">
+    tools:context=".ui.view.MainActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
+        android:layout_height="match_parent">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle"
+            style="@style/dialogTitle"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/dimen_16"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_24"
+            android:layout_marginEnd="@dimen/dimen_24"
+            android:gravity="start"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Tasks" />
+
+        <include
+            android:id="@+id/searchLayout"
+            layout="@layout/search_tasks_layout"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize" />
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
-    </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/dimen_16"
+            android:clipToPadding="false"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchLayout"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/row_item_task"
+            tools:visibility="visible" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/layoutEmptyView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginTop="@dimen/dimen_4"
+            android:gravity="center|center_horizontal|center_vertical"
+            android:orientation="vertical"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="@dimen/dimen_32"
+                android:layout_height="@dimen/dimen_32"
+                android:indeterminateTint="@color/green"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_empty_icon"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="@dimen/dimen_20"
+                android:alpha="0.4"
+                android:tint="@color/grey_7"
+                app:srcCompat="@drawable/baseline_list_alt_24" />
+
+            <TextView
+                android:id="@+id/tv_empty_main_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_4"
+                android:fontFamily="@font/roboto"
+                android:gravity="center_horizontal"
+                android:text="Your tasks list is empty"
+                android:textColor="@color/grey_7"
+                android:textSize="18sp" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fabAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
+        android:backgroundTint="@color/green"
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="16dp"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:srcCompat="@drawable/baseline_add_24" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Task Management App</string>
     <string name="action_settings">Settings</string>
+    <string name="open_task">Open Task</string>
+    <string name="are_you_sure_you_want_to_re_open_task">Are you sure you want to re-open task ?</string>
+    <string name="are_you_sure_you_want_to_close_task">Are you sure you want to Close task ?</string>
+    <string name="close_task">Close Task</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>

@@ -6,32 +6,39 @@ import com.kirwa.taskapp.data.remote.model.TasksResponse
 import com.kirwa.taskapp.data.repository.TasksRepository
 import kotlinx.coroutines.flow.Flow
 import com.kirwa.taskapp.data.remote.model.Result
+import kotlinx.coroutines.flow.flow
 
 class TasksViewModel(
     private val tasksRepository: TasksRepository,
 ) :
     ViewModel() {
 
-    suspend fun postCreateTask(tasks: Tasks): Result<TasksResponse> {
-        return tasksRepository.postCreateTask(tasks)
+
+    fun postCreateTask(tasks: Tasks): Flow<Result<Boolean>> = flow {
+        emit(Result.Loading)
+        emit(tasksRepository.postCreateTask(tasks))
     }
 
 
-    suspend fun closeTasks(taskId: String?): Result<TasksResponse> {
-        return tasksRepository.closeTasks(taskId)
+    fun closeTasks(taskId: String?): Flow<Result<Boolean>> = flow {
+        emit(Result.Loading)
+        emit(tasksRepository.closeTask(taskId))
+    }
+
+    fun updateTasks(task:Tasks): Flow<Result<Boolean>> = flow {
+        emit(Result.Loading)
+        emit(tasksRepository.updateTasks(task))
     }
 
 
-    suspend fun updateTasks(taskId: String?): Result<TasksResponse> {
-        return tasksRepository.updateTasks(taskId)
+    fun reopenTasks(taskId: String?): Flow<Result<Boolean>> = flow {
+        emit(Result.Loading)
+        emit(tasksRepository.reopenTasks(taskId))
     }
 
-    suspend fun reopenTasks(taskId: String?): Result<TasksResponse> {
-        return tasksRepository.reopenTasks(taskId)
-    }
-
-    suspend fun deleteTasks(taskId: String?): Result<TasksResponse> {
-        return tasksRepository.deleteTasks(taskId)
+    fun deleteTasks(taskId: String?): Flow<Result<Boolean>> = flow {
+        emit(Result.Loading)
+        emit(tasksRepository.deleteTasks(taskId))
     }
 
     suspend fun getRemoteTasks(): Result<Boolean> {
@@ -39,6 +46,8 @@ class TasksViewModel(
     }
 
     fun getTasks(): Flow<List<Tasks>> = tasksRepository.getTasks()
+
+    fun getTaskById(taskId: String?): Flow<Tasks?> = tasksRepository.getTaskById(taskId)
 
     fun searchTasks(searchText: String): Flow<List<Tasks>> =
         tasksRepository.searchTasks(searchText)

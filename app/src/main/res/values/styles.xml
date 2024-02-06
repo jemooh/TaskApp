@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <style name="confirmButton" parent="@style/Widget.MaterialComponents.Button">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Button</item>
+        <item name="fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">@dimen/text_size_16</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="cornerRadius">12dp</item>
+        <item name="android:layout_height">@dimen/button_height</item>
+    </style>
+
+
+    <style name="underlinedButtonText" parent="@style/Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Button</item>
+        <item name="android:textColor">@color/warn_red</item>
+        <item name="android:textSize">@dimen/text_size_18</item>
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+
+
+    <style name="searchTextInputLayout" parent="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Button</item>
+        <item name="fontFamily">@font/roboto</item>
+        <item name="android:textSize">@dimen/text_size_20</item>
+        <item name="android:layout_marginEnd">21dp</item>
+        <item name="android:layout_marginStart">21dp</item>
+        <item name="cornerRadius">43dp</item>
+        <item name="android:textColor">@color/grey_search_text</item>
+        <item name="hintTextAppearance">@color/grey_6</item>
+        <item name="android:textColorHint">@color/grey_6</item>
+        <item name="android:layout_height">@dimen/edit_view_height</item>
+    </style>
+
+    <style name="authTextInputEditText" >
+        <item name="fontFamily">@font/roboto</item>
+        <item name="android:layout_height">@dimen/edit_view_height</item>
+        <item name="android:textColor">@color/grey_search_text</item>
+        <item name="android:padding">@dimen/dimen_24</item>
+    </style>
+
+
+    <style name="searchEditText" parent="authTextInputEditText">
+        <item name="fontFamily">@font/roboto</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textColor">@color/grey_search_text</item>
+        <item name="android:textSize">@dimen/text_size_16</item>
+    </style>
+
+    <style name="rowItemTitle">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textColor">@color/grey_6</item>
+        <item name="android:textSize">@dimen/text_size_16</item>
+    </style>
+
+    <style name="rowItemBody">
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textColor">@color/grey_6</item>
+        <item name="android:textSize">@dimen/text_size_12</item>
+    </style>
+
+
+    <style name="dialogTitle">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textColor">@color/dark_grey_bg</item>
+        <item name="android:textSize">@dimen/text_size_28</item>
+    </style>
+
+    <style name="dialogBody">
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textColor">@color/grey_6</item>
+        <item name="android:textSize">@dimen/text_size_18</item>
+    </style>
+
+    <style name="textInputLayoutError" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/red</item>
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="authTextInputEditTextTasks">
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textColor">@color/grey_6</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
+    <style name="DialogAnimations" />
+
+    <style name="DialogAnimations.SmileWindow">
+        <item name="android:windowEnterAnimation">@anim/slide_anim</item>
+        <item name="android:windowExitAnimation">@anim/slide_out</item>
+    </style>
+
+
+</resources>

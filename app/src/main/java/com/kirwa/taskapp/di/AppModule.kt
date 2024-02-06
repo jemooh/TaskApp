@@ -1,14 +1,13 @@
 package com.kirwa.taskapp.di
 
 
-import android.content.Context
 import androidx.room.Room
 import com.kirwa.taskapp.data.local.datasource.TasksDatabase
 import com.kirwa.taskapp.data.remote.api.TaskApiService
 import com.kirwa.taskapp.data.repository.TasksRepository
 import com.kirwa.taskapp.data.repository.TasksRepositoryImpl
 import com.kirwa.taskapp.ui.viewmodel.TasksViewModel
-import com.uda.grassrootelection.utils.Constants
+import com.kirwa.taskapp.utils.Constants
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module

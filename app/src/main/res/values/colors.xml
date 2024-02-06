@@ -7,4 +7,8 @@
     <color name="grey_5">#A8A6AC</color>
     <color name="grey_7">#2A282F</color>
     <color name="grey_6">#625F68</color>
+    <color name="grey_search_text">#49454F</color>
+    <color name="dark_grey_bg">#1D1B20</color>
+    <color name="green">#179847</color>
+    <color name="search_grey_bg">#F8F8F8</color>
 </resources>
