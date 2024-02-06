@@ -4,6 +4,7 @@ import android.app.Activity
 import android.graphics.Color
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
@@ -26,7 +27,6 @@ fun TextInputLayout.setErrorMessage(errorMessage: String) {
     this.isErrorEnabled = true
     this.error = errorMessage
 }
-
 
 
 fun Activity.hideKeyboard() {
@@ -80,4 +80,24 @@ fun View.disableClick() {
     this.isClickable = false
 }
 
+
+fun TextView.priorityColor(level: Int?) {
+    when (level) {
+        1 -> {
+            this.setBackgroundColor(ContextCompat.getColor(this.context, R.color.green))
+        }
+        2 -> {
+            this.setBackgroundColor(ContextCompat.getColor(this.context, R.color.yellow))
+        }
+        3 -> {
+            this.setBackgroundColor(ContextCompat.getColor(this.context, R.color.red))
+        }
+        4 -> {
+            this.setBackgroundColor(ContextCompat.getColor(this.context, R.color.dark_red))
+        }
+        else -> {
+            this.setBackgroundColor(ContextCompat.getColor(this.context, R.color.green))
+        }
+    }
+}
 

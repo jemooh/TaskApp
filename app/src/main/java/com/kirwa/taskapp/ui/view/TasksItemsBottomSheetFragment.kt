@@ -16,6 +16,7 @@ import com.kirwa.taskapp.ui.viewmodel.TasksViewModel
 import com.kirwa.taskapp.utils.Constants
 import com.kirwa.taskapp.utils.Util
 import com.kirwa.taskapp.utils.hide
+import com.kirwa.taskapp.utils.priorityColor
 import com.kirwa.taskapp.utils.show
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -46,6 +47,8 @@ class TasksItemsBottomSheetFragment :
                     binding.tvCardTitle.text = task?.content
                     val date = task.dueDate?.let { Util.formatTaskDate(it) }
                     val time = task.dueDatetime?.let { Util.formatTaskDateTime(it) }
+                    binding.tvPriorityBar.priorityColor(task.priority ?: 1)
+
                     binding.tvCardBody.text = "Due By: $date, $time"
                     this.isComplete = task?.isCompleted ?: false
                     if (task?.isCompleted == true) {

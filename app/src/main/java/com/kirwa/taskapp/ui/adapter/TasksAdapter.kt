@@ -9,6 +9,7 @@ import com.kirwa.taskapp.data.local.model.Tasks
 import com.kirwa.taskapp.databinding.RowItemTaskBinding
 import com.kirwa.taskapp.utils.Util
 import com.kirwa.taskapp.utils.hide
+import com.kirwa.taskapp.utils.priorityColor
 import com.kirwa.taskapp.utils.show
 
 class TasksAdapter(
@@ -23,7 +24,7 @@ class TasksAdapter(
                 val date = dueDate?.let { Util.formatTaskDate(it) }
                 val time = dueDatetime?.let { Util.formatTaskDateTime(it) }
                 binding.tvDueTime.text = "Due By: $date, $time"
-
+                binding.tvPriorityBar.priorityColor(priority ?: 1)
 
                 if (isCompleted) {
                     binding.ivCompleted.show()

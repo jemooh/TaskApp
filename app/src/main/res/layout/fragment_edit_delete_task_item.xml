@@ -33,6 +33,17 @@
             android:orientation="horizontal"
             card_view:layout_constraintGuide_percent="0.37" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPriorityBar"
+            style="@style/rowItemBody"
+            android:layout_width="5dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="@dimen/dimen_32"
+            android:layout_marginBottom="@dimen/dimen_4"
+            android:layout_marginStart="@dimen/dimen_16"
+            android:background="@color/green"
+            app:layout_constraintTop_toTopOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvCardTitle"
@@ -40,12 +51,12 @@
             android:layout_width="0dp"
             android:layout_marginTop="@dimen/dimen_32"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dimen_24"
+            android:layout_marginStart="@dimen/dimen_16"
             android:layout_marginEnd="@dimen/dimen_16"
             android:gravity="start"
             android:textSize="@dimen/text_size_20"
             app:layout_constraintEnd_toStartOf="@+id/ivCompleted"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvPriorityBar"
             app:layout_constraintTop_toTopOf="parent"
             android:text="Open Task" />
 
@@ -71,14 +82,13 @@
             android:layout_width="0dp"
             android:layout_marginTop="@dimen/dimen_8"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dimen_24"
             android:layout_marginEnd="@dimen/dimen_16"
             android:gravity="start"
             android:textColor="@color/grey_5"
             android:fontFamily="@font/roboto"
-            android:textSize="@dimen/text_size_16"
+            android:textSize="@dimen/text_size_14"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvCardTitle"
             app:layout_constraintTop_toBottomOf="@+id/tvCardTitle"
             android:text="Open Task" />
 
