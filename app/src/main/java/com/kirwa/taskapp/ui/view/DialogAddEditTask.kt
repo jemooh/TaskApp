@@ -121,7 +121,6 @@ class DialogAddEditTask : DialogFragment(R.layout.dialog_add_task) {
         setUpSpinnerDropDown(tasksViewModel.priorityMapping())
         if (isEdit) {
             tasksViewModel.getTaskById(taskId).onEach { task ->
-                Timber.e("testing.."+selectedPriority)
                 this.selectedPriority = task?.priority?.let { Util.setPriorityName(it) }
                 this.selectedPriorityLevel = task?.priority?.toString()
                 binding.edtTask.setText(task?.content.toString())
@@ -246,7 +245,7 @@ class DialogAddEditTask : DialogFragment(R.layout.dialog_add_task) {
             )
         }
         if (isEdit) {
-            binding.edtSelectPriorityDropDown.setText(selectedPriority)
+            binding.edtSelectPriorityDropDown.setText(selectedPriority,false)
         }
 
         val customSpinnerAdapter =
@@ -257,8 +256,7 @@ class DialogAddEditTask : DialogFragment(R.layout.dialog_add_task) {
                 false
             this.selectedPriority = customSpinnerAdapter.getItem(position)?.name
             this.selectedPriorityLevel = customSpinnerAdapter.getItem(position)?.id
-            binding.edtSelectPriorityDropDown.setText(selectedPriority)
-            Timber.e("testing.."+selectedPriority)
+            binding.edtSelectPriorityDropDown.setText(selectedPriority,false)
 
         }
     }
