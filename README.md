@@ -52,7 +52,6 @@ Contribution guidelines.
 
 ### Todo app screenshots
 
-| <img src="app.jpg" height="480">
-||  <img src="list.jpg" height="480">
-||  <img src="create_task.jpg" height="480"> ||
-<img src="details.jpg" height="480">
+| <img src="list.jpg" height="480">
+||  <img src="details.jpg" height="480"> ||
+<img src="create_task.jpg" height="480">
