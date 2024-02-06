@@ -42,8 +42,11 @@ internal class TasksRepositoryImpl(
                             taskId = remoteTask.id.toString(),
                             content = remoteTask.content,
                             dueString = remoteTask.due?.string,
+                            dueDate = remoteTask.due?.date,
+                            dueDatetime = remoteTask.due?.datetime,
                             dueLang = remoteTask.due?.lang,
                             priority = remoteTask.priority,
+                            createdAt = remoteTask.createdAt,
                             isCompleted =remoteTask.isCompleted,
                         )
                         tasksDao.insertAsync(task)
@@ -69,6 +72,9 @@ internal class TasksRepositoryImpl(
                         taskId = remoteTask.id.toString(),
                         content = remoteTask.content,
                         dueString = remoteTask.due?.string,
+                        dueDate = remoteTask.due?.date,
+                        dueDatetime = remoteTask.due?.datetime,
+                        createdAt = remoteTask.createdAt,
                         dueLang = remoteTask.due?.lang,
                         priority = remoteTask.priority,
                         isCompleted = remoteTask.isCompleted,
@@ -144,7 +150,10 @@ internal class TasksRepositoryImpl(
                         taskId = remoteTask.id.toString(),
                         content = remoteTask.content,
                         dueString = remoteTask.due?.string,
+                        dueDate = remoteTask.due?.date,
+                        dueDatetime = remoteTask.due?.datetime,
                         dueLang = remoteTask.due?.lang,
+                        createdAt = remoteTask.createdAt,
                         priority = remoteTask.priority,
                         isCompleted = remoteTask.isCompleted,
                     )

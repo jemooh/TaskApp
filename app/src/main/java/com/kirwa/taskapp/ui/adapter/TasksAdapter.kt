@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kirwa.taskapp.data.local.model.Tasks
 import com.kirwa.taskapp.databinding.RowItemTaskBinding
+import com.kirwa.taskapp.utils.Util
 import com.kirwa.taskapp.utils.hide
 import com.kirwa.taskapp.utils.show
 
@@ -19,11 +20,14 @@ class TasksAdapter(
             tasks.apply {
 
                 binding.tvContent.text = content
-                binding.tvDueTime.text = dueString
+                val date = dueDate?.let { Util.formatTaskDate(it) }
+                val time = dueDatetime?.let { Util.formatTaskDateTime(it) }
+                binding.tvDueTime.text = "Due By: $date, $time"
 
-                if (isCompleted){
+
+                if (isCompleted) {
                     binding.ivCompleted.show()
-                }else{
+                } else {
                     binding.ivCompleted.hide()
                 }
 

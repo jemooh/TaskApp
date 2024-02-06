@@ -11,4 +11,6 @@
     <color name="dark_grey_bg">#1D1B20</color>
     <color name="green">#179847</color>
     <color name="search_grey_bg">#F8F8F8</color>
+    <color name="hint">#B7B7B7</color>
+    <color name="btn_blue_bg">#002D62</color>
 </resources>

@@ -24,14 +24,26 @@ import com.kirwa.taskapp.utils.setErrorMessage
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
+import com.kirwa.taskapp.utils.hide
+import com.kirwa.taskapp.utils.show
 
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.Calendar
+import java.util.Date
 
 class DialogAddEditTask : DialogFragment(R.layout.dialog_add_task) {
 
     private val tasksViewModel: TasksViewModel by viewModel()
     private var _binding: DialogAddTaskBinding? = null
     private val binding get() = _binding!!
+    private val calendar: Calendar = Calendar.getInstance()
+    private var dueTime: String? = null
+    private var dueDate: String? = null
+    private var date: Date? = null
+    private var dateTime: Date? = null
+    private var isEdit: Boolean = false
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -97,13 +109,13 @@ class DialogAddEditTask : DialogFragment(R.layout.dialog_add_task) {
 
     private fun setUpView() {
         Util.clearTextInputEditText(binding.edtTask, binding.textInputTask)
-        Util.clearTextInputEditText(binding.edtDue, binding.textInputDue)
         val taskId = requireArguments().getString(TASKID)
-        val isEdit = requireArguments().getBoolean(ISEDIT)
+         isEdit = requireArguments().getBoolean(ISEDIT)
         if (isEdit) {
             tasksViewModel.getTaskById(taskId).onEach { task ->
                 binding.edtTask.setText(task?.content.toString())
-                binding.edtDue.setText(task?.dueString.toString())
+                binding.tvTime.text = task?.dueDatetime?.let { Util.formatTaskDateTime(it) }
+                binding.tvDate.text = task?.dueDate?.let { Util.formatTaskDate(it) }
             }.launchIn(lifecycleScope)
         }
 
@@ -111,17 +123,23 @@ class DialogAddEditTask : DialogFragment(R.layout.dialog_add_task) {
         binding.btnConfirm.setOnClickListener {
             if (validateInputs()) {
                 if (isEdit) {
+                    val dateServer = Util.dateToStringDateServer(date)
+                    val time = Util.dateToStringTimeServer(dateTime)
                     val task = Tasks(
                         taskId = taskId,
                         content = binding.edtTask.text.toString(),
-                        dueString = "tomorrow at 12:00",
+                        dueDate = Util.dateToStringDateServer(date),
+                        dueString = "$dateServer at $time",
                         dueLang = "en"
                     )
                     postEditTask(task)
                 } else {
+                    val dateServer = Util.dateToStringDateServer(date)
+                    val time = Util.dateToStringTimeServer(dateTime)
                     val task = Tasks(
                         content = binding.edtTask.text.toString(),
-                        dueString = "tomorrow at 12:00",
+                        dueDate = Util.dateToStringDateServer(date),
+                        dueString = "$dateServer at $time",
                         dueLang = "en"
                     )
                     postCreateTask(task)
@@ -130,10 +148,83 @@ class DialogAddEditTask : DialogFragment(R.layout.dialog_add_task) {
             }
         }
 
+
+        binding.tvTime.setOnClickListener {
+            selectDueTime()
+        }
+
+
+        binding.tvDate.setOnClickListener {
+            selectDueDate()
+        }
+
+
         binding.btnCancel.setOnClickListener {
             this.dismiss()
         }
 
+    }
+
+    fun updateDueTimeLabel() {
+        dateTime = calendar?.time
+        binding.tvTime.text = Util.dateToStringTimeLocal(calendar?.time)
+        dueTime = Util.dateToStringTimeLocal(calendar?.time)
+    }
+
+    fun updateDueDate() {
+        date = calendar?.time
+        binding.tvDate.text = Util.dateToStringDateLocal(calendar?.time)
+        dueDate = Util.dateToStringDateLocal(calendar?.time)
+    }
+
+
+    fun selectDueTime() {
+        val time = TimePickerDialog.OnTimeSetListener() { view, hourOfDay, minute ->
+            // TODO Auto-generated method stub
+            calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
+            calendar.set(Calendar.MINUTE, minute)
+            updateDueTimeLabel()
+            binding.tvError.hide()
+        }
+        val bidTimeDialog = TimePickerDialog(
+            requireContext(),
+            R.style.datepicker,
+            time,
+            calendar.get(Calendar.HOUR_OF_DAY),
+            calendar.get(Calendar.MINUTE),
+            false
+        )
+        bidTimeDialog.setTitle("Select Due time")
+        bidTimeDialog.show()
+    }
+
+    fun selectDueDate() {
+        val date = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            // TODO Auto-generated method stub
+            calendar.set(Calendar.YEAR, year)
+            calendar.set(Calendar.MONTH, monthOfYear)
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            updateDueDate()
+            binding.tvError.hide()
+        }
+        val today = Calendar.getInstance()
+        val yesterday = Calendar.getInstance()
+        // Allow previous day selection
+        //yesterday.add(Calendar.DATE, -1)
+
+
+        val dateDialog = DatePickerDialog(
+            requireContext(),
+            R.style.datepicker,
+            date,
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+        dateDialog.datePicker.minDate = yesterday.time.time
+        //dateDialog.datePicker.maxDate = today.time.time
+        dateDialog.setTitle("Select Due Date")
+        dateDialog.show()
     }
 
     private fun validateInputs(): Boolean {
@@ -142,8 +233,10 @@ class DialogAddEditTask : DialogFragment(R.layout.dialog_add_task) {
             return false
         }
 
-        if (TextUtils.isEmpty(binding.edtDue.text)) {
-            binding.textInputTask.setErrorMessage("Enter Due Date")
+        if (!dueTime.isNullOrEmpty() && !dueDate.isNullOrEmpty()) {
+            binding.tvError.hide()
+        } else {
+            binding.tvError.show()
             return false
         }
         return true

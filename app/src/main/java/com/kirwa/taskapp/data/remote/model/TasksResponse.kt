@@ -4,6 +4,7 @@ package com.kirwa.taskapp.data.remote.model
 data class TasksResponse(
     val id: String? = null,
     val content: String? = null,
+    val createdAt: String? = null,
     val priority: Int? = null,
     val isCompleted: Boolean = false,
     val due: Due? = null

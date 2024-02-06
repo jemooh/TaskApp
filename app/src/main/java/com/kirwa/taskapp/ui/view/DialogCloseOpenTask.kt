@@ -153,7 +153,10 @@ class DialogCloseOpenTask : DialogFragment(R.layout.dialog_open_task) {
             fragmentManager: FragmentManager?
         ) {
             fragmentManager?.let {
-                newInstance(taskId).show(it, DialogCloseOpenTask::class.java.simpleName)
+                newInstance(taskId, isCompleted).show(
+                    it,
+                    DialogCloseOpenTask::class.java.simpleName
+                )
             }
         }
     }

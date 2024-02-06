@@ -14,6 +14,9 @@ data class Tasks(
     var taskId: String? = null,
     var content: String? = null,
     var dueString: String? = null,
+    @ExcludeSerialize
+    var dueDate: String? = null,
+    var dueDatetime: String? = null,
     var dueLang: String? = null,
     var priority: Int? = null,
     var createdAt: String? = null,

@@ -11,11 +11,10 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputLayout
-import okhttp3.ResponseBody
-import org.json.JSONException
-import org.json.JSONObject
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 
 internal class Util {
     companion object {
@@ -46,6 +45,69 @@ internal class Util {
             }
         }
 */
+
+        fun dateToStringTimeLocal(date: Date?): String {
+            val targetFormat =
+                SimpleDateFormat(Constants.SIMPLE_TIME_FORMAT, Locale.ENGLISH)
+            return targetFormat.format(date)
+        }
+
+        fun dateToStringDateLocal(date: Date?): String {
+            val targetFormat =
+                SimpleDateFormat(Constants.SIMPLE_DATE_TIME_FORMAT_READABLE_DATE, Locale.ENGLISH)
+            return targetFormat.format(date)
+        }
+
+
+        fun dateToStringTimeServer(date: Date?): String {
+            val targetFormat =
+                SimpleDateFormat(Constants.SIMPLE_TIME_FORMAT_SERVER, Locale.ENGLISH)
+            return targetFormat.format(date)
+        }
+
+        fun dateToStringDateServer(date: Date?): String {
+            val targetFormat =
+                SimpleDateFormat(Constants.SIMPLE_DATE_FORMAT, Locale.ENGLISH)
+            return targetFormat.format(date)
+        }
+
+
+        fun formatTaskDate(timeString: String): String {
+            val msDateFormat = SimpleDateFormat(
+                Constants.SIMPLE_DATE_FORMAT,
+                Locale.getDefault()
+            )
+            val targetFormat = SimpleDateFormat(
+                Constants.SIMPLE_DATE_TIME_FORMAT_READABLE_DATE,
+                Locale.getDefault()
+            )
+            return try {
+                val date = msDateFormat.parse(timeString)
+                targetFormat.format(date)
+            } catch (ex: ParseException) {
+                ex.printStackTrace()
+                Constants.EMPTY_STRING
+            }
+        }
+
+        fun formatTaskDateTime(timeString: String): String {
+            val msDateFormat = SimpleDateFormat(
+                Constants.SIMPLE_DATE_TIME_FORMAT_TIME,
+                Locale.getDefault()
+            )
+            val targetFormat = SimpleDateFormat(
+                Constants.SIMPLE_TIME_FORMAT,
+                Locale.getDefault()
+            )
+            return try {
+                val date = msDateFormat.parse(timeString)
+                targetFormat.format(date)
+            } catch (ex: ParseException) {
+                ex.printStackTrace()
+                Constants.EMPTY_STRING
+            }
+        }
+
 
 
         fun setRecyclerViewNoDivider(context: Context?, recyclerView: RecyclerView) {

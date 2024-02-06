@@ -14,6 +14,7 @@ import com.kirwa.taskapp.databinding.DialogOpenTaskBinding
 import com.kirwa.taskapp.databinding.FragmentEditDeleteTaskItemBinding
 import com.kirwa.taskapp.ui.viewmodel.TasksViewModel
 import com.kirwa.taskapp.utils.Constants
+import com.kirwa.taskapp.utils.Util
 import com.kirwa.taskapp.utils.hide
 import com.kirwa.taskapp.utils.show
 import kotlinx.coroutines.flow.launchIn
@@ -43,7 +44,9 @@ class TasksItemsBottomSheetFragment :
             tasksViewModel.getTaskById(taskId).onEach { task ->
                 if (task != null) {
                     binding.tvCardTitle.text = task?.content
-                    binding.tvCardBody.text = task?.dueString
+                    val date = task.dueDate?.let { Util.formatTaskDate(it) }
+                    val time = task.dueDatetime?.let { Util.formatTaskDateTime(it) }
+                    binding.tvCardBody.text = "Due By: $date, $time"
                     this.isComplete = task?.isCompleted ?: false
                     if (task?.isCompleted == true) {
                         binding.btnClose.text = getString(R.string.open)
