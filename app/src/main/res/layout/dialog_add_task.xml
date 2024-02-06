@@ -76,6 +76,44 @@
                 app:layout_constraintStart_toStartOf="parent" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvPriorityTitle"
+            style="@style/labelTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_16"
+            android:layout_marginTop="@dimen/dimen_24"
+            android:layout_marginEnd="@dimen/dimen_16"
+            android:text="Priority"
+            android:textColor="@color/grey_6"
+            app:layout_constraintEnd_toStartOf="@+id/guideline1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputTask" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutPriories"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_8"
+            android:layout_marginEnd="@dimen/dimen_16"
+            android:layout_marginStart="@dimen/dimen_16"
+            android:hint="Select Priority Level"
+            app:layout_constraintTop_toBottomOf="@+id/tvPriorityTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:errorTextAppearance="@style/textInputLayoutError">
+
+            <AutoCompleteTextView
+                android:id="@+id/edtSelectPriorityDropDown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:inputType="text"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_14" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvDateTitle"
@@ -89,7 +127,7 @@
             android:textColor="@color/grey_6"
             app:layout_constraintEnd_toStartOf="@+id/guideline1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputTask" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPriories" />
 
 
 
@@ -133,7 +171,7 @@
             android:text="Time"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/guideline1"
-            app:layout_constraintTop_toBottomOf="@+id/textInputTask" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPriories" />
 
 
         <com.google.android.material.textview.MaterialTextView

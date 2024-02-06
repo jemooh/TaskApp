@@ -26,10 +26,15 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import com.kirwa.taskapp.data.local.model.Priority
+import com.kirwa.taskapp.utils.CustomSpinnerAdapter
+import com.kirwa.taskapp.utils.SpinnerItem
 import com.kirwa.taskapp.utils.hide
 import com.kirwa.taskapp.utils.show
 
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
+import java.util.ArrayList
 import java.util.Calendar
 import java.util.Date
 
@@ -41,6 +46,8 @@ class DialogAddEditTask : DialogFragment(R.layout.dialog_add_task) {
     private val calendar: Calendar = Calendar.getInstance()
     private var dueTime: String? = null
     private var dueDate: String? = null
+    private var selectedPriority: String? = null
+    private var selectedPriorityLevel: String? = null
     private var date: Date? = null
     private var dateTime: Date? = null
     private var isEdit: Boolean = false
@@ -110,9 +117,13 @@ class DialogAddEditTask : DialogFragment(R.layout.dialog_add_task) {
     private fun setUpView() {
         Util.clearTextInputEditText(binding.edtTask, binding.textInputTask)
         val taskId = requireArguments().getString(TASKID)
-         isEdit = requireArguments().getBoolean(ISEDIT)
+        isEdit = requireArguments().getBoolean(ISEDIT)
+        setUpSpinnerDropDown(tasksViewModel.priorityMapping())
         if (isEdit) {
             tasksViewModel.getTaskById(taskId).onEach { task ->
+                Timber.e("testing.."+selectedPriority)
+                this.selectedPriority = task?.priority?.let { Util.setPriorityName(it) }
+                this.selectedPriorityLevel = task?.priority?.toString()
                 binding.edtTask.setText(task?.content.toString())
                 binding.tvTime.text = task?.dueDatetime?.let { Util.formatTaskDateTime(it) }
                 binding.tvDate.text = task?.dueDate?.let { Util.formatTaskDate(it) }
@@ -130,6 +141,7 @@ class DialogAddEditTask : DialogFragment(R.layout.dialog_add_task) {
                         content = binding.edtTask.text.toString(),
                         dueDate = Util.dateToStringDateServer(date),
                         dueString = "$dateServer at $time",
+                        priority = selectedPriorityLevel?.toInt(),
                         dueLang = "en"
                     )
                     postEditTask(task)
@@ -140,7 +152,8 @@ class DialogAddEditTask : DialogFragment(R.layout.dialog_add_task) {
                         content = binding.edtTask.text.toString(),
                         dueDate = Util.dateToStringDateServer(date),
                         dueString = "$dateServer at $time",
-                        dueLang = "en"
+                        dueLang = "en",
+                        priority = selectedPriorityLevel?.toInt()
                     )
                     postCreateTask(task)
                 }
@@ -165,20 +178,20 @@ class DialogAddEditTask : DialogFragment(R.layout.dialog_add_task) {
 
     }
 
-    fun updateDueTimeLabel() {
+    private fun updateDueTimeLabel() {
         dateTime = calendar?.time
         binding.tvTime.text = Util.dateToStringTimeLocal(calendar?.time)
         dueTime = Util.dateToStringTimeLocal(calendar?.time)
     }
 
-    fun updateDueDate() {
+    private fun updateDueDate() {
         date = calendar?.time
         binding.tvDate.text = Util.dateToStringDateLocal(calendar?.time)
         dueDate = Util.dateToStringDateLocal(calendar?.time)
     }
 
 
-    fun selectDueTime() {
+    private fun selectDueTime() {
         val time = TimePickerDialog.OnTimeSetListener() { view, hourOfDay, minute ->
             // TODO Auto-generated method stub
             calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
@@ -198,19 +211,16 @@ class DialogAddEditTask : DialogFragment(R.layout.dialog_add_task) {
         bidTimeDialog.show()
     }
 
-    fun selectDueDate() {
+    private fun selectDueDate() {
         val date = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-            // TODO Auto-generated method stub
             calendar.set(Calendar.YEAR, year)
             calendar.set(Calendar.MONTH, monthOfYear)
             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
             updateDueDate()
             binding.tvError.hide()
         }
-        val today = Calendar.getInstance()
         val yesterday = Calendar.getInstance()
         // Allow previous day selection
-        //yesterday.add(Calendar.DATE, -1)
 
 
         val dateDialog = DatePickerDialog(
@@ -222,14 +232,47 @@ class DialogAddEditTask : DialogFragment(R.layout.dialog_add_task) {
             calendar.get(Calendar.DAY_OF_MONTH)
         )
         dateDialog.datePicker.minDate = yesterday.time.time
-        //dateDialog.datePicker.maxDate = today.time.time
         dateDialog.setTitle("Select Due Date")
         dateDialog.show()
     }
 
+
+    private fun setUpSpinnerDropDown(priories: List<Priority>) {
+        //binding.edtSelectPriorityDropDown.inputType = 0
+        val spinnerItems = priories.map { item ->
+            SpinnerItem(
+                item.name.toString(),
+                item.level.toString()
+            )
+        }
+        if (isEdit) {
+            binding.edtSelectPriorityDropDown.setText(selectedPriority)
+        }
+
+        val customSpinnerAdapter =
+            CustomSpinnerAdapter(requireContext(), spinnerItems as ArrayList<SpinnerItem>)
+        binding.edtSelectPriorityDropDown.setAdapter(customSpinnerAdapter)
+        binding.edtSelectPriorityDropDown.setOnItemClickListener { _, _, position, _ ->
+            if (binding.textInputLayoutPriories.isErrorEnabled) binding.textInputLayoutPriories.isErrorEnabled =
+                false
+            this.selectedPriority = customSpinnerAdapter.getItem(position)?.name
+            this.selectedPriorityLevel = customSpinnerAdapter.getItem(position)?.id
+            binding.edtSelectPriorityDropDown.setText(selectedPriority)
+            Timber.e("testing.."+selectedPriority)
+
+        }
+    }
+
     private fun validateInputs(): Boolean {
+
+
         if (TextUtils.isEmpty(binding.edtTask.text)) {
             binding.textInputTask.setErrorMessage("Enter Task")
+            return false
+        }
+
+        if (TextUtils.isEmpty(binding.edtSelectPriorityDropDown.text)) {
+            binding.textInputLayoutPriories.setErrorMessage("Select Priority Level")
             return false
         }
 

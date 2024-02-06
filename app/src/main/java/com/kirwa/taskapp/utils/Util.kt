@@ -26,25 +26,24 @@ internal class Util {
         }
 
 
-
         fun getCurrentDayOfTheWeek(): String {
             val sdf = SimpleDateFormat("EEEE")
             val d = Date()
             return sdf.format(d)
         }
 
- /*       fun ResponseBody.errorMessage(): String {
-            val responseBodyString = this.string()
-            return try {
-                //val error = JSONObject(responseBodyString)
-                var message = "Unknown Error"
-                //val name = error.optString("message")
-                responseBodyString
-            } catch (e: JSONException) {
-                "Internal Server Error, Please try again"
-            }
-        }
-*/
+        /*       fun ResponseBody.errorMessage(): String {
+                   val responseBodyString = this.string()
+                   return try {
+                       //val error = JSONObject(responseBodyString)
+                       var message = "Unknown Error"
+                       //val name = error.optString("message")
+                       responseBodyString
+                   } catch (e: JSONException) {
+                       "Internal Server Error, Please try again"
+                   }
+               }
+       */
 
         fun dateToStringTimeLocal(date: Date?): String {
             val targetFormat =
@@ -109,7 +108,6 @@ internal class Util {
         }
 
 
-
         fun setRecyclerViewNoDivider(context: Context?, recyclerView: RecyclerView) {
             val mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             recyclerView.layoutManager = mLayoutManager
@@ -117,6 +115,29 @@ internal class Util {
         }
 
 
+        fun setPriorityName(name: Int): String {
+            return when (name) {
+                1 -> {
+                    "Normal"
+                }
+
+                2 -> {
+                    "Low"
+                }
+
+                3 -> {
+                    "High"
+                }
+
+                4 -> {
+                    "Urgent"
+                }
+
+                else -> {
+                    "Normal"
+                }
+            }
+        }
 
 
         fun isConnected(context: Context): Boolean {

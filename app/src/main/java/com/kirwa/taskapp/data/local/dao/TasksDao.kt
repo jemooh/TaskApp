@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TasksDao : CoroutineBaseDao<Tasks> {
-    @Query("SELECT * FROM Tasks ORDER BY createdAt DESC ")
+    @Query("SELECT * FROM Tasks ORDER BY priority DESC ")
     fun getTasks(): Flow<List<Tasks>>
 
     @Query("SELECT * FROM Tasks WHERE taskId=:taskId ")
