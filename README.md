@@ -26,8 +26,8 @@ Contribution guidelines.
 * Technologies used
     * [Kotlin](https://kotlinlang.org/)
     * [XML Layout](https://developer.android.com/develop/ui/views/layout/declaring-layout)
-    * [Jetpack Compose](https://developer.android.com/jetpack/compose)
-    * [Jetpack Compose Material 3](https://developer.android.com/jetpack/androidx/releases/compose-material3)
+    * [ROOM ORM](https://developer.android.com/training/data-storage/room)
+    * [Material 3](https://developer.android.com/jetpack/compose/designsystems/material3)
     * [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)
     * [Flow](https://kotlinlang.org/docs/reference/coroutines/flow.html)
     * [KOIN Dependency](https://insert-koin.io/)
@@ -42,15 +42,16 @@ Contribution guidelines.
 
 * Tests
     * [JUnit5](https://junit.org/junit5/)
-    * [Spek](https://www.spekframework.org/)
     * [MockK](https://github.com/mockk/mockk)
-    * [Turbine](https://github.com/cashapp/turbine)
 
 * Gradle
     * [Gradle Kotlin DSL](https://docs.gradle.org/current/userguide/kotlin_dsl.html)
-    * Plugins
-        * [Spotless](https://github.com/diffplug/spotless)
-        * [Dokka](https://github.com/Kotlin/dokka)
+    * 
+* Plugins
         * [jacoco](https://github.com/jacoco/jacoco)
-        * [Ktlint](https://github.com/JLLeitschuh/ktlint-gradle)
-        * [Detekt](https://github.com/detekt/detekt)
+
+### Todo app screenshots
+
+| <img src="app.jpg" height="480">
+||  <img src="list.jpg" height="480">
+||  <img src="create_task.jpg" height="480">
