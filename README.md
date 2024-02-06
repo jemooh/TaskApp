@@ -2,10 +2,11 @@ Task Management Application
 
 
 ----------------------------------
-- Mobile application to help users manage daily todo tasks. 
 
+- Mobile application to help users manage daily todo tasks.
 
 ## Requirements
+
 Ensure you have your environment set up. Use this checklist to verify.
 
 * JDK Version 1.7 & above
@@ -14,7 +15,6 @@ Ensure you have your environment set up. Use this checklist to verify.
 * Android SDK Build tools 33.0.0
 * Android Support Repository
 * Android Support library
-
 
 Contribution guidelines.
 --------------------------------
@@ -46,12 +46,13 @@ Contribution guidelines.
 
 * Gradle
     * [Gradle Kotlin DSL](https://docs.gradle.org/current/userguide/kotlin_dsl.html)
-    * 
+    *
 * Plugins
-        * [jacoco](https://github.com/jacoco/jacoco)
+  * [jacoco](https://github.com/jacoco/jacoco)
 
 ### Todo app screenshots
 
 | <img src="app.jpg" height="480">
 ||  <img src="list.jpg" height="480">
-||  <img src="create_task.jpg" height="480">
+||  <img src="create_task.jpg" height="480"> ||
+<img src="details.jpg" height="480">
